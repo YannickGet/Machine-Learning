@@ -12,11 +12,12 @@ training_B = cancerTraining_df[cancerTraining_df[1] == "B"]
 test_M = cancerTest_df[cancerTest_df[1] == "M"]
 test_B = cancerTest_df[cancerTest_df[1] == "B"]
 
-plt.scatter(training_M[2], training_M[3], s = 20, marker=".", color="blue", label="positiv")
-plt.scatter(training_B[2], training_B[3], s = 20, marker=".", color="negativ")
+plt.scatter(training_M[2], training_M[3], s = 20, marker=".", color="blue", label="positive_training")
+plt.scatter(training_B[2], training_B[3], s = 20, marker=".", color="green", label="negative_training")
 
-plt.scatter(test_M[2], test_M[3], s = 20, marker="x", color="blue")
-plt.scatter(test_B[2], test_B[3], s = 20, marker="x", color="green")
+plt.scatter(test_M[2], test_M[3], s = 20, marker="x", color="blue", label="positive_test")
+plt.scatter(test_B[2], test_B[3], s = 20, marker="x", color="green", label="negativ_test")
 
+plt.legend()
 plt.show()
 
