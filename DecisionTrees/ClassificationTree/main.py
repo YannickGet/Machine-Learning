@@ -16,7 +16,7 @@ def calc_impurity(data):
     if len(np.unique(data[:,0])) > 2:
         
         sorted_data = data[data[:,0].argsort()]
-        main_dict = {}
+        main_dict: dict[float, float] = {}
 
         for i in range(1,sorted_data):
             
@@ -39,5 +39,22 @@ def calc_impurity(data):
             imp2 = round(1 - ((false_xs_true_ys / count_false_xs) ** 2) - ((false_xs_false_ys / count_false_xs) ** 2), 3)
 
 
-
+            main_dict[avg] = (calc_weighted_avg(imp1, imp2, count_true_xs, count_false_xs))
             
+        return {min(main_dict, key = main_dict.get) : main_dict[(min(main_dict, key = main_dict.get))]}
+
+    else:
+
+        true_xs = data[data[:,0] == True]
+        count_true_xs = len(true_xs)
+
+        imp1 = 0 if count_true_xs == 0 else round(1 - ((len(true_xs[true_xs[:,1] == True]) / count_true_xs) ** 2) - ((len(true_xs[true_xs[:,1] == False]) / count_true_xs) ** 2), 3)
+
+
+        false_xs = data[data[:,0] == False]
+        count_false_xs = len(true_xs)
+
+        imp2 = 0 if count_false_xs == 0 else round(1 - ((len(false_xs[false_xs[:,1] == True]) / count_false_xs) ** 2) - ((len(false_xs[false_xs[:,1] == False]) / count_false_xs) ** 2), 3)
+            
+        return calc_weighted_avg(imp1, imp2, count_true_xs, count_false_xs)
+
